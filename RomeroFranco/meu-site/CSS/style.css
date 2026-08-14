@@ -1,0 +1,177 @@
+/* ===== CONFIGURAÇÕES GERAIS ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #eaf6ff, #d8ecff);
+    color: #17324d;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 35px;
+    border-radius: 20px;
+
+    /* sombra suave */
+    box-shadow: 0 10px 30px rgba(25, 93, 145, 0.18);
+}
+
+
+/* ===== TÍTULOS ===== */
+
+h1 {
+    text-align: center;
+    color: #1769aa;
+    font-size: 42px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+h1::after {
+    content: " ♥";
+    color: #5aa9e6;
+}
+
+h2 {
+    color: #1769aa;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #9bd3f5;
+}
+
+
+/* ===== PARÁGRAFOS ===== */
+
+p {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    color: #294b66;
+}
+
+body > p:first-of-type {
+    text-align: center;
+    color: #4a90c2;
+    font-size: 19px;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+strong {
+    color: #1769aa;
+}
+
+em {
+    color: #4c86aa;
+}
+
+
+/* ===== IMAGEM ===== */
+
+img {
+    display: block;
+    width: 140px;
+    height: 160px;
+    object-fit: cover;
+
+    margin: 25px auto;
+    border-radius: 50%;
+
+    border: 5px solid #ffffff;
+    box-shadow: 0 5px 18px rgba(23, 105, 170, 0.25);
+
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+
+/* ===== LISTAS ===== */
+
+ul,
+ol {
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+li {
+    padding: 8px;
+    margin-bottom: 5px;
+    color: #294b66;
+}
+
+ul li::marker {
+    color: #4da6dc;
+}
+
+ol li::marker {
+    color: #1769aa;
+    font-weight: bold;
+}
+
+
+/* ===== LINKS ===== */
+
+a {
+    display: inline-block;
+    text-decoration: none;
+
+    background-color: #4da6dc;
+    color: white;
+
+    padding: 11px 20px;
+    margin-top: 10px;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    background-color: #1769aa;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(23, 105, 170, 0.25);
+}
+
+
+/* ===== LINK DE CONTATO ===== */
+
+a[href="contato.html"] {
+    background-color: #76bde8;
+}
+
+a[href="contato.html"]:hover {
+    background-color: #1769aa;
+}
+
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 600px) {
+
+    body {
+        margin: 15px;
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    img {
+        width: 125px;
+        height: 145px;
+    }
+}
