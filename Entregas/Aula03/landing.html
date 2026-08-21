@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Viajem dos sonhos</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Viajem dos sonhos (Pique 007)</h1>
+        <p>Data: 20/08/2026</p>
+        <p>Local: Senai</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#planejamento">Planejamento</a>
+        <a href="#roteiro">Roteiro</a>
+    </nav>
+
+    <main>
+        <section id="planejamento">
+            <h2>Comunicação</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horario</th>
+                        <th>Atividade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>09:00</td>
+                        <td>Viajem</td>
+                    </tr>
+                    <tr>
+                        <td>15:00</td>
+                        <td>Chegada</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </section>
+        <section id="roteiro">
+            <h2>Roteiro</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horario</th>
+                        <th>Atividade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>16:00</td>
+                        <td>Chegada ao hotel</td>
+                    </tr>
+                    <tr>
+                        <td>18:00</td>
+                        <td>Jantar</td>
+                    </tr>
+                    <tr>
+                        <td>20:00</td>
+                        <td>Dormir</td>
+                    </tr>
+                    <tr>
+                        <td>00:00</td>
+                        <td>Assaltar BDKode</td>
+                    </tr>
+                    <tr>
+                        <td>03:00</td>
+                        <td>Ficar com a morena</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <article>Metas: me divertir nessa viagem e ficar rico</article>
+            <br>
+            <aside>Objetivo: voltar em três dias</aside>
+        </section>
+        <section>
+            <h2>Atividades</h2>
+            <form action="/cofirmar" method="POST">
+                <!-- action = para onde vai. method = como vai -->
+              
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" name="tipo" required placeholder="Informe a conclusão">
+              
+                <label for="Atividade">Atividade:</label>
+                <select id="Atividade" name="atividade">
+                  <option>Jantar</option>
+                  <option>Dormir</option>
+                  <option>Viajar</option>
+                  <option>Visitar pontos turisticos</option>
+                  <option>Ficar rico com o Yuri !!!</option>
+                </select>
+              
+                <button type="submit">Enviar</button>
+              </form>
+        </section>
+    </main>
+    <footer>
+        <p>© Todos os direitos destinados a 00conpany</p>
+    </footer>
+
+</body>
+
+</html>
