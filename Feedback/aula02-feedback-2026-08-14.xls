@@ -1,0 +1,22 @@
+﻿Nome;Status;Nota (1-5);Estrutura válida;strong/em usados corretamente;alt preenchido na imagem;ul e ol corretas;Links absoluto e relativo ok;Observações
+Yuri;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+GUilherme;Concluído;0;Não;Não;Não;Não;Não;
+Kevin;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+Richard;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+Pedro;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+Lucas;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+Luiz;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+Jeferson;Concluído;4;Sim;Sim;Não;Sim;Sim;
+Vitor;Concluído;4;Sim;Sim;Sim;Sim;Não;
+Romero;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+Mateus;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+Juliani;Concluído;5;Sim;Sim;Sim;Sim;Sim;
+
+Pontos de discussão coletiva;Discutido
+Qual a diferença entre o que fica no head e o que fica no body?;Não
+Por que o alt da imagem é importante mesmo quando ela carrega normalmente?;Não
+Quando usar ol em vez de ul? Deem um exemplo próprio.;Não
+Qual a diferença entre um link absoluto e um relativo?;Não
+Quem esqueceu de fechar alguma tag? O validador W3C pegou o erro?;Não
+Como ficaria essa página com CSS aplicado? Prévia da Aula 03.;Não
+Yuri;Não

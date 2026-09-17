@@ -129,7 +129,7 @@ a{color:#2563eb}
 
   <div class="success-banner" id="success">
     <h3>Parabéns! Você completou todos os passos.</h3>
-    <p>Você já sabe montar uma navbar e uma grade responsiva com Flexbox. Agora é hora do desafio autônomo!</p>
+    <p>Você já domina o eixo <code>row</code>, o <code>wrap</code> e o <code>flex</code>. No desafio, a proposta muda: uma página "Nossa Equipe" com <code>flex-direction: column</code>, proporções e <code>align-self</code> — sem passo a passo.</p>
     <button class="next-big" onclick="window.location.href='a06_desafio.html'">🎯 Ir para o Desafio →</button>
   </div>
 
@@ -142,11 +142,11 @@ const STEPS = [
     time: "8 min",
     instrs: [
       "Crie um arquivo <code>navbar.html</code> (ou reutilize sua página existente)",
-      "Adicione um <code>&lt;nav class=\"navbar\"&gt;</code> com uma div de logo e uma <code>&lt;ul class=\"nav-links\"&gt;</code> com 3 <code>&lt;li&gt;&lt;a&gt;</code>",
+      "Adicione um <code>&lt;nav class=\"navbar\"&gt;</code> com uma <code>&lt;div class=\"logo\"&gt;</code> e uma <code>&lt;ul class=\"nav-links\"&gt;</code> com 3 <code>&lt;li&gt;&lt;a href=\"#\"&gt;...&lt;/a&gt;&lt;/li&gt;</code>",
       "Conecte um <code>navbar.css</code> (ou use o estilos.css existente)",
-      "Salve e confira: sem CSS, tudo deve aparecer empilhado verticalmente"
+      "Salve e confira: sem CSS de layout, tudo aparece empilhado e a lista mostra os marcadores"
     ],
-    tip: "<strong>Dica:</strong> a ul tem margens e list-style padrão do navegador — pode zerar com margin:0; padding:0; list-style:none;",
+    tip: "<strong>Dica:</strong> a <code>ul</code> tem margem, recuo e marcadores padrão do navegador — isso não é culpa do Flexbox. Você vai zerar tudo no passo 3.",
     gab: null
   },
   {
@@ -164,6 +164,8 @@ const STEPS = [
   <span class="a">justify-content</span>: <span class="s">space-between</span><span class="t">;</span>
   <span class="a">align-items</span>: <span class="s">center</span><span class="t">;</span>
   <span class="a">padding</span>: <span class="s">16px 24px</span><span class="t">;</span>
+  <span class="a">background-color</span>: <span class="s">#1e293b</span><span class="t">;</span>
+  <span class="a">color</span>: <span class="s">white</span><span class="t">;</span>
 <span class="t">}</span>`
   },
   {
@@ -171,6 +173,7 @@ const STEPS = [
     time: "6 min",
     instrs: [
       "Na classe <code>.nav-links</code>, adicione <code>display: flex</code> e <code>gap: 20px</code>",
+      "Zere o padrão do navegador: <code>list-style: none</code>, <code>margin: 0</code>, <code>padding: 0</code>",
       "Remova qualquer margin manual que você tenha colocado nos links",
       "Salve e confirme o espaçamento uniforme entre eles"
     ],
@@ -179,15 +182,17 @@ const STEPS = [
   <span class="a">display</span>: <span class="s">flex</span><span class="t">;</span>
   <span class="a">gap</span>: <span class="s">20px</span><span class="t">;</span>
   <span class="a">list-style</span>: <span class="s">none</span><span class="t">;</span>
+  <span class="a">margin</span>: <span class="s">0</span><span class="t">;</span>
+  <span class="a">padding</span>: <span class="s">0</span><span class="t">;</span>
 <span class="t">}</span>`
   },
   {
     title: "Criando a grade de cards",
     time: "10 min",
     instrs: [
-      "Abaixo da navbar, crie uma <code>&lt;div class=\"grade-de-cards\"&gt;</code> com pelo menos 6 <code>&lt;div class=\"card\"&gt;</code> dentro",
+      "Abaixo da navbar, crie uma <code>&lt;section class=\"grade-de-cards\"&gt;</code> com pelo menos 6 <code>&lt;article class=\"card\"&gt;</code> dentro",
       "Na classe <code>.grade-de-cards</code>, adicione <code>display: flex</code>, <code>flex-wrap: wrap</code> e <code>gap: 16px</code>",
-      "Salve e veja os cards se organizarem em fila, quebrando linha quando necessário"
+      "Salve e observe: os cards ficam em fila, mas cada um só tem a largura do próprio texto — o passo 5 resolve isso"
     ],
     tip: "<strong>Sem flex-wrap:</strong> os cards tentariam encolher para caber tudo numa linha só — quase sempre feio.",
     gab: `<span class="k">.grade-de-cards</span> <span class="t">{</span>

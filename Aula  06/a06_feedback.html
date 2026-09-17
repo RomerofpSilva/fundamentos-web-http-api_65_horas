@@ -110,7 +110,7 @@ body{font-family:system-ui,sans-serif;color:#1e293b;background:#f8fafc;min-heigh
   <div class="top-bar">
     <div>
       <div class="tb-title">Painel de apresentações — Aula 06</div>
-      <div class="tb-meta">Feedback individual + discussão coletiva · 45 minutos · ⭐ Checkpoint 2</div>
+      <div class="tb-meta">Apresentações da página "Nossa Equipe" + discussão coletiva · 45 minutos · ⭐ Checkpoint 2 (aprovado com 4 de 5 critérios)</div>
     </div>
     <span class="t-chip" id="timer-chip">45:00</span>
     <button class="tbtn" id="timer-btn" onclick="startTimer()">Iniciar sessão</button>
@@ -157,15 +157,15 @@ const CORES_AVATAR = [
   {bg:'#e0f2fe',txt:'#0369a1'},
 ];
 
-const CHECKS = ['Navbar com justify-content/align-items', 'Espaçamento com gap', 'Grade com flex-wrap correto', 'Uso adequado de order', 'Código organizado'];
+const CHECKS = ['Hero com proporção flex 2/1 e centralizado', 'Números com space-evenly', 'Cards em column com botão na base', 'Rodapé com order + align-self', 'Explica qual eixo cada propriedade controla'];
 
 const PONTOS_BASE = [
-  {t:'Alguém confundiu justify-content com align-items? Qual eixo cada um controla mesmo?', tag:'pegadinha comum'},
-  {t:'Por que gap é preferível a usar margin em cada item da fila?', tag:'boa prática'},
-  {t:'O que aconteceu quando redimensionaram a janela com flex-wrap: wrap ativado?', tag:'conceito'},
-  {t:'Alguém usou order de forma criativa? O HTML mudou junto?', tag:'curiosidade'},
+  {t:'Nos cards em column, quem usou justify-content para centralizar na horizontal? O que aconteceu?', tag:'pegadinha comum'},
+  {t:'Por que o hero com flex: 2 e flex: 1 dá 2/3 e 1/3 — e não 2px e 1px?', tag:'conceito'},
+  {t:'Como ficou a faixa de números: alguém usou space-between ou space-around no lugar de space-evenly? Qual a diferença visível?', tag:'conceito'},
+  {t:'O botão ficou na base do card sem min-height? Por que o espaço precisa existir para o space-between distribuir?', tag:'pegadinha comum'},
+  {t:'Coluna Contato com order: -1 — a ordem de leitura por Tab mudou junto? Isso é bom ou ruim?', tag:'acessibilidade'},
   {t:'Como o Flexbox (1D) se compara ao que vamos ver de CSS Grid (2D) na próxima aula?', tag:'próxima aula'},
-  {t:'Dúvidas sobre flex-grow, flex-shrink ou o atalho flex?', tag:'dúvidas'},
 ];
 
 let alunos = [

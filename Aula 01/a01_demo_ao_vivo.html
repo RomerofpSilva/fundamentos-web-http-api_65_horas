@@ -203,10 +203,15 @@ function playStep(){
   const stripped=full.replace(/<[^>]+>/g,'');
   const htmlParts=[];
   let i=0,pos=0;
-  while(i<full.length){
+   while(i<full.length){
     if(full[i]==='<'){
       const end=full.indexOf('>',i);
       if(end!==-1){htmlParts.push({type:'tag',val:full.slice(i,end+1),pos});i=end+1;continue;}
+    }
+    if(full[i]==='&'){
+      // entidade HTML (&lt; &gt; &quot; &amp; ...) digitada como um único caractere
+      const m=full.slice(i,i+10).match(/^&[a-zA-Z#0-9]+;/);
+      if(m){htmlParts.push({type:'char',val:m[0],pos,ch:'x'});pos+=m[0].length;i+=m[0].length;continue;}
     }
     htmlParts.push({type:'char',val:full[i],pos,ch:stripped[pos]||''});
     pos++;i++;

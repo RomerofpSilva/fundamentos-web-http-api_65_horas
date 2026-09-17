@@ -26,7 +26,8 @@ body{font-family:system-ui,sans-serif;color:#1e293b;background:#f8fafc;min-heigh
 .brief-body{padding:16px 20px}
 
 .context-box{background:#f8fafc;border-radius:8px;padding:12px 14px;font-size:13px;color:#475569;line-height:1.6;margin-bottom:14px;border-left:3px solid #3b82f6}
-.context-box strong{color:#1e293b;font-weight:600;display:block;margin-bottom:4px}
+.context-box strong{color:#1e293b;font-weight:600}
+.context-box strong.ctx-title{display:block;margin-bottom:4px}
 
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:640px){.two-col{grid-template-columns:1fr}}
@@ -98,16 +99,16 @@ code{font-family:'Courier New',monospace;font-size:12px;background:#f1f5f9;paddi
     <div class="brief-top">
       <div class="brief-badge">Desafio autônomo · 60 minutos · ⭐ Checkpoint 2</div>
       <a href="https://instagram.com/karizeviecelli" target="_blank" class="autoria-badge" style="margin-bottom:7px">© @karizeviecelli</a>
-      <div class="brief-title">Barra de Navegação e Grade de Cards com Flexbox</div>
+      <div class="brief-title">Página "Nossa Equipe" com Flexbox</div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-        <div class="brief-sub">Trabalhe sozinho(a) — sem copiar do colega. Use o que você aprendeu hoje.</div>
+        <div class="brief-sub">Trabalhe sozinho(a). Diferente da prática guiada, aqui você vai usar <code>flex-direction: column</code>, proporções e <code>align-self</code>.</div>
         <button onclick="window.location.href='a06_feedback.html'" style="font-size:12px;font-weight:600;background:#1d4ed8;color:#fff;border:none;padding:6px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;font-family:inherit;margin-top:4px">📋 Feedback →</button>
       </div>
     </div>
     <div class="brief-body">
       <div class="context-box">
-        <strong>Contexto real</strong>
-        O cliente quer o topo do site (navbar) organizado e uma seção de destaques com uma grade de cards que se adapta bem ao tamanho da tela — sem precisar de media queries ainda (isso vem na aula 8).
+        <strong class="ctx-title">Contexto real</strong>
+O cliente quer uma página <code>equipe.html</code> com quatro seções: um <strong>hero</strong> (texto + imagem), uma <strong>faixa de números</strong>, os <strong>cards dos membros</strong> e um <strong>rodapé</strong>. Tudo só com Flexbox — sem <code>float</code>, sem <code>position</code> e sem media queries (isso vem na aula 8). A grade de cards da prática guiada não vale como entrega: o desafio é aplicar o que ela <em>não</em> cobriu.
       </div>
 
       <div class="two-col">
@@ -118,13 +119,12 @@ code{font-family:'Courier New',monospace;font-size:12px;background:#f1f5f9;paddi
         <div>
           <div class="col-title">Critérios de avaliação</div>
           <div class="crit-list">
-            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Navbar com display:flex e justify-content:space-between</div>
-            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Itens da navbar alinhados com align-items:center</div>
-            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Espaçamento entre links feito com gap (sem margin manual)</div>
-            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Grade de cards com flex-wrap:wrap</div>
-            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Cards usando flex-grow/flex-shrink (ou o atalho flex)</div>
-            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Uso correto de order em pelo menos um item</div>
-            <div class="crit-item"><div class="crit-dot" style="background:#22c55e"></div>Bônus: use align-self em um card para destacá-lo verticalmente</div>
+            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Hero com texto ocupando o dobro da imagem (flex: 2 / flex: 1) e centralizado verticalmente</div>
+            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Faixa de números com justify-content: space-evenly</div>
+            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Cards em flex-direction: column, conteúdo centralizado e botão na base</div>
+            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Grade de membros quebrando linha (flex-wrap + flex)</div>
+            <div class="crit-item"><div class="crit-dot" style="background:#3b82f6"></div>Rodapé com order e align-self na coluna Contato</div>
+            <div class="crit-item"><div class="crit-dot" style="background:#22c55e"></div>Bônus: um dos membros com flex-shrink: 0 e largura fixa (flex: 0 0 240px) — observe o efeito</div>
           </div>
         </div>
       </div>
@@ -137,7 +137,7 @@ code{font-family:'Courier New',monospace;font-size:12px;background:#f1f5f9;paddi
       <span id="prog-txt">0 de 8 concluídos</span>
     </div>
     <div class="prog-bg"><div class="prog-fg" id="prog-fg"></div></div>
-    <div class="prog-msg" id="prog-msg">Comece pela estrutura HTML da navbar.</div>
+    <div class="prog-msg" id="prog-msg">Comece pela estrutura HTML das quatro seções.</div>
   </div>
 
   <div class="timer-row">
@@ -152,36 +152,36 @@ code{font-family:'Courier New',monospace;font-size:12px;background:#f1f5f9;paddi
 
   <div class="entrega">
     <div class="entrega-title">Entrega</div>
-    <p>Arquivo <code>navbar.html</code> + CSS conectado, salvo na pasta <code>meu-site/</code> e aberto no navegador. Chame o docente para mostrar o resultado ao vivo — inclusive redimensionando a janela — antes da etapa de apresentações.</p>
+    <p>Arquivo <code>equipe.html</code> + CSS conectado, salvo na pasta <code>meu-site/</code> e aberto no navegador. Chame o docente para mostrar o resultado ao vivo — redimensione a janela e explique <em>qual eixo</em> cada propriedade está controlando — antes da etapa de apresentações.</p>
   </div>
 
   <div class="success-banner" id="success-banner">
     <h3>Desafio concluído!</h3>
-    <p>Todos os requisitos marcados. Chame o docente para apresentar sua navbar e grade de cards.</p>
+    <p>Todos os requisitos marcados. Chame o docente para apresentar sua página "Nossa Equipe".</p>
   </div>
 
 </div>
 
 <script>
 const REQS = [
-  {t: "Estrutura HTML: <code>&lt;nav&gt;</code> com logo + lista de links, e uma grade com pelo menos 6 cards"},
-  {t: "Navbar com <code>display: flex</code> e <code>justify-content: space-between</code>"},
-  {t: "Navbar com <code>align-items: center</code>"},
-  {t: "Links da navbar espaçados com <code>gap</code> (sem margin manual)"},
-  {t: "Grade de cards com <code>display: flex</code> e <code>flex-wrap: wrap</code>"},
-  {t: "Cards com <code>flex</code> (grow/shrink/basis) definido"},
-  {t: "Pelo menos 1 card usando <code>order</code> para mudar de posição"},
-  {t: "Código organizado, comentado e testado redimensionando a janela"},
+  {t: "Estrutura HTML: <code>&lt;section class=\"hero\"&gt;</code>, <code>&lt;section class=\"numeros\"&gt;</code>, <code>&lt;section class=\"equipe\"&gt;</code> e <code>&lt;footer class=\"rodape\"&gt;</code>"},
+  {t: "Hero: bloco de texto e bloco de imagem lado a lado, texto com <code>flex: 2</code> e imagem com <code>flex: 1</code>, ambos centralizados verticalmente"},
+  {t: "Faixa de números: 4 blocos com <code>justify-content: space-evenly</code> (espaço igual entre eles E nas pontas)"},
+  {t: "Equipe: pelo menos 4 cards com avatar, nome, cargo e botão, em um container com <code>flex-wrap: wrap</code> e <code>gap</code>"},
+  {t: "Cada card com <code>flex-direction: column</code>, conteúdo centralizado horizontalmente e botão sempre na base (<code>justify-content: space-between</code> + <code>min-height</code>)"},
+  {t: "Rodapé: 3 colunas de mesma largura (<code>flex: 1</code>)"},
+  {t: "Coluna Contato por último no HTML mas primeira na tela (<code>order: -1</code>) e alinhada à base (<code>align-self: flex-end</code>)"},
+  {t: "Código comentado indicando, em cada container, qual é o eixo principal — e testado redimensionando a janela"},
 ];
 
 const MSGS = [
-  "Comece pela estrutura HTML da navbar.",
-  "Bom começo! Agora ative o display:flex e distribua o espaço.",
-  "Bom progresso! Alinhe tudo verticalmente com align-items.",
-  "Metade do caminho! O gap cuida do espaçamento dos links.",
-  "Continue — a grade de cards também precisa de display:flex e wrap.",
-  "Falta pouco — defina o flex de cada card.",
-  "Quase lá! Teste o order em algum card.",
+  "Comece pela estrutura HTML das quatro seções.",
+  "Bom começo! No hero, lembre: flex-grow divide o espaço em partes (2 + 1 = 3).",
+  "Hero pronto? space-evenly é diferente de space-between — confira as pontas.",
+  "Metade do caminho! Agora a grade de membros com wrap e gap.",
+  "Atenção: em column, align-items centraliza na HORIZONTAL.",
+  "Falta pouco — flex: 1 em cada coluna do rodapé.",
+  "Quase lá! order muda só a posição visual; align-self só afeta um item.",
   "Tudo concluído! Chame o docente para apresentar.",
 ];
 

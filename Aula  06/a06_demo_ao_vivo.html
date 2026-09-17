@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     Material didático desenvolvido por @karizeviecelli
+     © 2026 — Todos os direitos reservados.
+     Uso autorizado exclusivamente para fins educacionais.
+     Redistribuição sem crédito é proibida.
+     ============================================================ -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="@karizeviecelli">
+  <meta name="copyright" content="© 2026 @karizeviecelli. Todos os direitos reservados.">
+<title>Demonstração ao vivo — Aula 06 Flexbox</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;color:#1e293b;background:#f8fafc;min-height:100vh;padding:24px 24px 70px}
+
+.demo-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:1100px;margin:0 auto}
+
+.panel{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;background:#fff}
+
+.panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #e2e8f0;background:#f8fafc}
+.panel-title{font-size:12px;font-weight:500;color:#64748b}
+.dots-row{display:flex;gap:5px}
+.dot{width:10px;height:10px;border-radius:50%}
+
+.editor-body{background:#1E293B;min-height:340px;padding:16px;font-family:'Courier New',monospace;font-size:12px;line-height:1.75;color:#94A3B8;overflow:hidden;position:relative}
+#code-output{white-space:pre-wrap;word-break:break-all}
+.cursor{display:inline-block;width:2px;height:14px;background:#60A5FA;vertical-align:middle;animation:blink .9s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.preview-body{background:#ffffff;min-height:340px;padding:16px;overflow-y:auto}
+
+.step-bar{padding:12px 16px;border-top:1px solid #e2e8f0;background:#f8fafc;display:flex;align-items:center;gap:10px;grid-column:1/-1}
+.step-label{font-size:12px;color:#64748b;flex:1;line-height:1.4}
+.step-badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;white-space:nowrap;background:#eff6ff;color:#1d4ed8}
+.ctrl-btn{font-size:12px;font-weight:500;padding:6px 14px;border-radius:8px;border:1px solid #cbd5e1;background:#ffffff;color:#1e293b;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap}
+.ctrl-btn:hover{background:#f1f5f9}
+.ctrl-btn.go{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.ctrl-btn.go:hover{background:#1e40af}
+.ctrl-btn:disabled{opacity:.35;pointer-events:none}
+
+.narr-box{grid-column:1/-1;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;background:#f8fafc;font-size:13px;color:#475569;line-height:1.6;min-height:52px}
+.narr-box strong{color:#1e293b;font-weight:600}
+
+.prog-track{height:3px;background:#e2e8f0;border-radius:2px;grid-column:1/-1;overflow:hidden}
+.prog-fill{height:100%;background:#3b82f6;border-radius:2px;transition:width .3s ease;width:0%}
+
+.page-title{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.page-title h1{font-size:16px;font-weight:600;color:#1e293b}
+.page-title p{font-size:12px;color:#94a3b8}
+
+.k{color:#93C5FD}
+.kv{color:#6EE7B7}
+.a{color:#FDE68A}
+.s{color:#FDA4AF}
+.t{color:#E2E8F0}
+.c{color:#475569;font-style:italic}
+
+@media(max-width:700px){
+  .demo-wrap{grid-template-columns:1fr}
+  .panel:last-of-type{display:none}
+}
+
+/* ── Autoria @karizeviecelli ── */
+.autoria-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:600;color:#2563eb;
+  background:#eff6ff;border:1px solid #bfdbfe;
+  padding:2px 9px;border-radius:20px;text-decoration:none;
+  font-family:'Courier New',monospace;letter-spacing:.02em;white-space:nowrap;
+}
+.autoria-badge:hover{background:#bfdbfe;color:#1e40af}
+</style>
+</head>
+<body>
+
+<div class="demo-wrap">
+  <div class="page-title">
+    <h1>Demonstração ao vivo — Aula 06</h1>
+    <p>Docente digita · Alunos acompanham &nbsp;<a href="https://instagram.com/karizeviecelli" target="_blank" class="autoria-badge">© @karizeviecelli</a></p>
+
+    <button onclick="window.location.href='a06_pratica_guiada.html'" style="font-size:12px;font-weight:600;background:#fff;border:1.5px solid #1d4ed8;color:#1d4ed8;padding:5px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0" onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='#fff'">📝 Prática →</button></div>
+
+  <div class="prog-track"><div class="prog-fill" id="prog"></div></div>
+
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">VS Code — navbar.html / estilos.css</span>
+      <div class="dots-row">
+        <div class="dot" style="background:#ef4444"></div>
+        <div class="dot" style="background:#f59e0b"></div>
+        <div class="dot" style="background:#10b981"></div>
+      </div>
+    </div>
+    <div class="editor-body"><span id="code-output"></span><span class="cursor" id="cur"></span></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">Navegador — resultado ao vivo</span>
+      <div class="dots-row">
+        <div class="dot" style="background:#ef4444"></div>
+        <div class="dot" style="background:#f59e0b"></div>
+        <div class="dot" style="background:#10b981"></div>
+      </div>
+    </div>
+    <div class="preview-body" id="preview"></div>
+  </div>
+
+  <div class="narr-box" id="narr">Pronto para começar. Clique em <strong>Iniciar digitação</strong> para ver o docente construindo uma navbar e uma grade de cards com Flexbox.</div>
+
+  <div class="step-bar">
+    <span class="step-badge" id="step-badge">Etapa 1 / 7</span>
+    <span class="step-label" id="step-desc">O HTML sem Flexbox</span>
+    <button class="ctrl-btn" id="btn-prev" onclick="prevStep()" disabled>&#8592; Anterior</button>
+    <button class="ctrl-btn go" id="btn-play" onclick="playStep()">Iniciar digitação</button>
+    <button class="ctrl-btn" id="btn-next" onclick="nextStep()" disabled>Próxima &#8594;</button>
+  </div>
+</div>
+
+<script>
+const PV_BASE = `<style>
+#preview *{box-sizing:border-box}
+#preview .pv-root{font-family:system-ui,sans-serif;font-size:13px;color:#1e293b}
+#preview .navbar{background-color:#1e293b;color:white;padding:16px 24px}
+#preview .logo{font-size:22px;font-weight:bold}
+#preview .nav-links a{color:white;text-decoration:none}
+#preview .card{padding:16px;border:1px solid #cbd5e1;border-radius:8px;background:#fff}
+#preview .grade-de-cards{padding:16px;background:#f8fafc;margin-top:12px;border:1px dashed #cbd5e1}
+</style>`;
+
+const HTML_NAV = `<nav class="navbar">
+  <div class="logo">MeuSite</div>
+  <ul class="nav-links">
+    <li><a href="#">Início</a></li>
+    <li><a href="#">Sobre</a></li>
+    <li><a href="#">Contato</a></li>
+  </ul>
+</nav>`;
+
+const HTML_GRADE = `<section class="grade-de-cards">
+  <article class="card">Card 1</article>
+  <article class="card">Card 2</article>
+  <article class="card">Card 3</article>
+  <article class="card card-destaque">Card 4</article>
+  <article class="card">Card 5</article>
+  <article class="card">Card 6</article>
+</section>`;
+
+const STEPS = [
+  {
+    label: "O HTML sem Flexbox",
+    narr: "<strong>Docente:</strong> \"Este é o HTML da barra de navegação: um <code>&lt;nav&gt;</code> com um logo e uma lista de links. Sem CSS de layout, cada elemento de bloco ocupa a linha inteira e a lista ainda mostra os marcadores — tudo empilhado.\"",
+    code: `<span class="c">&lt;!-- navbar.html --&gt;</span>
+<span class="k">&lt;nav</span> <span class="a">class</span>=<span class="s">"navbar"</span><span class="k">&gt;</span>
+  <span class="k">&lt;div</span> <span class="a">class</span>=<span class="s">"logo"</span><span class="k">&gt;</span><span class="t">MeuSite</span><span class="k">&lt;/div&gt;</span>
+  <span class="k">&lt;ul</span> <span class="a">class</span>=<span class="s">"nav-links"</span><span class="k">&gt;</span>
+    <span class="k">&lt;li&gt;&lt;a</span> <span class="a">href</span>=<span class="s">"#"</span><span class="k">&gt;</span><span class="t">Início</span><span class="k">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="k">&lt;li&gt;&lt;a</span> <span class="a">href</span>=<span class="s">"#"</span><span class="k">&gt;</span><span class="t">Sobre</span><span class="k">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="k">&lt;li&gt;&lt;a</span> <span class="a">href</span>=<span class="s">"#"</span><span class="k">&gt;</span><span class="t">Contato</span><span class="k">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="k">&lt;/ul&gt;</span>
+<span class="k">&lt;/nav&gt;</span>`,
+    preview: PV_BASE + `<div class="pv-root">${HTML_NAV}</div>`
+  },
+  {
+    label: "Ativando display: flex no container",
+    narr: "<strong>Docente:</strong> \"Adiciono <code>display: flex</code> na <code>.navbar</code>. Os dois filhos diretos — o logo e a lista — passam a ficar lado a lado. Reparem que a lista ainda tem marcadores e o recuo padrão do navegador: isso é do <code>&lt;ul&gt;</code>, não do Flexbox.\"",
+    code: `<span class="k">.navbar</span> <span class="t">{</span>
+  <span class="a">display</span>: <span class="s">flex</span><span class="t">;</span>
+  <span class="a">padding</span>: <span class="s">16px 24px</span><span class="t">;</span>
+  <span class="a">background-color</span>: <span class="s">#1e293b</span><span class="t">;</span>
+  <span class="a">color</span>: <span class="s">white</span><span class="t">;</span>
+<span class="t">}</span>`,
+    preview: PV_BASE + `<style>#preview .navbar{display:flex}</style><div class="pv-root">${HTML_NAV}</div>`
+  },
+  {
+    label: "justify-content e align-items",
+    narr: "<strong>Docente:</strong> \"<code>justify-content: space-between</code> empurra o logo para a ponta esquerda e a lista para a direita — isso é o eixo principal. O logo tem fonte maior que os links, então <code>align-items: center</code> alinha os dois na mesma altura — isso é o eixo cruzado.\"",
+    code: `<span class="k">.navbar</span> <span class="t">{</span>
+  <span class="a">display</span>: <span class="s">flex</span><span class="t">;</span>
+  <span class="a">justify-content</span>: <span class="s">space-between</span><span class="t">;</span> <span class="c">/* eixo principal */</span>
+  <span class="a">align-items</span>: <span class="s">center</span><span class="t">;</span>         <span class="c">/* eixo cruzado */</span>
+  <span class="a">padding</span>: <span class="s">16px 24px</span><span class="t">;</span>
+  <span class="a">background-color</span>: <span class="s">#1e293b</span><span class="t">;</span>
+  <span class="a">color</span>: <span class="s">white</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="k">.logo</span> <span class="t">{</span>
+  <span class="a">font-size</span>: <span class="s">22px</span><span class="t">;</span>
+  <span class="a">font-weight</span>: <span class="s">bold</span><span class="t">;</span>
+<span class="t">}</span>`,
+    preview: PV_BASE + `<style>#preview .navbar{display:flex;justify-content:space-between;align-items:center}</style><div class="pv-root">${HTML_NAV}</div>`
+  },
+  {
+    label: "A lista também vira flex, com gap",
+    narr: "<strong>Docente:</strong> \"A <code>.nav-links</code> vira um segundo container flex: os <code>&lt;li&gt;</code> ficam lado a lado e o <code>gap: 20px</code> cuida do espaço entre eles — sem margin em cada link. Aproveito para zerar o marcador, a margem e o recuo padrão da lista.\"",
+    code: `<span class="k">.nav-links</span> <span class="t">{</span>
+  <span class="a">display</span>: <span class="s">flex</span><span class="t">;</span>
+  <span class="a">gap</span>: <span class="s">20px</span><span class="t">;</span>
+  <span class="a">list-style</span>: <span class="s">none</span><span class="t">;</span>
+  <span class="a">margin</span>: <span class="s">0</span><span class="t">;</span>
+  <span class="a">padding</span>: <span class="s">0</span><span class="t">;</span>
+<span class="t">}</span>
+
+<span class="k">.nav-links a</span> <span class="t">{</span>
+  <span class="a">color</span>: <span class="s">white</span><span class="t">;</span>
+  <span class="a">text-decoration</span>: <span class="s">none</span><span class="t">;</span>
+<span class="t">}</span>`,
+    preview: PV_BASE + `<style>#preview .navbar{display:flex;justify-content:space-between;align-items:center}#preview .nav-links{display:flex;gap:20px;list-style:none;margin:0;padding:0}</style><div class="pv-root">${HTML_NAV}</div>`
+  },
+  {
+    label: "Grade de cards: flex-wrap e gap",
+    narr: "<strong>Docente:</strong> \"Agora seis cards dentro de uma <code>&lt;section&gt;</code>. Com <code>display: flex</code>, <code>flex-wrap: wrap</code> e <code>gap: 16px</code>, eles ficam em fila e quebram linha se não couber. Mas cada card ainda tem só a largura do próprio texto — vamos resolver isso no próximo passo.\"",
+    code: `<span class="c">&lt;!-- HTML --&gt;</span>
+<span class="k">&lt;section</span> <span class="a">class</span>=<span class="s">"grade-de-cards"</span><span class="k">&gt;</span>
+  <span class="k">&lt;article</span> <span class="a">class</span>=<span class="s">"card"</span><span class="k">&gt;</span><span class="t">Card 1</span><span class="k">&lt;/article&gt;</span>
+  <span class="c">... até o Card 6 ...</span>
+<span class="k">&lt;/section&gt;</span>
+
+<span class="c">/* CSS */</span>
+<span class="k">.grade-de-cards</span> <span class="t">{</span>
+  <span class="a">display</span>: <span class="s">flex</span><span class="t">;</span>
+  <span class="a">flex-wrap</span>: <span class="s">wrap</span><span class="t">;</span>
+  <span class="a">gap</span>: <span class="s">16px</span><span class="t">;</span>
+  <span class="a">padding</span>: <span class="s">16px</span><span class="t">;</span>
+<span class="t">}</span>`,
+    preview: PV_BASE + `<style>#preview .navbar{display:flex;justify-content:space-between;align-items:center}#preview .nav-links{display:flex;gap:20px;list-style:none;margin:0;padding:0}#preview .grade-de-cards{display:flex;flex-wrap:wrap;gap:16px}</style><div class="pv-root">${HTML_NAV}${HTML_GRADE}</div>`
+  },
+  {
+    label: "Cards crescem e encolhem com flex",
+    narr: "<strong>Docente:</strong> \"Aplico <code>flex: 1 1 200px</code> em cada card: base de 200px, pode crescer para preencher o espaço sobrando e pode encolher. Vejam a grade se reorganizar: os cards preenchem cada linha e quebram quando o próximo não cabe.\"",
+    code: `<span class="k">.card</span> <span class="t">{</span>
+  <span class="a">flex</span>: <span class="s">1 1 200px</span><span class="t">;</span> <span class="c">/* grow shrink basis */</span>
+  <span class="a">padding</span>: <span class="s">16px</span><span class="t">;</span>
+  <span class="a">border</span>: <span class="s">1px solid #cbd5e1</span><span class="t">;</span>
+  <span class="a">border-radius</span>: <span class="s">8px</span><span class="t">;</span>
+<span class="t">}</span>`,
+    preview: PV_BASE + `<style>#preview .navbar{display:flex;justify-content:space-between;align-items:center}#preview .nav-links{display:flex;gap:20px;list-style:none;margin:0;padding:0}#preview .grade-de-cards{display:flex;flex-wrap:wrap;gap:16px}#preview .card{flex:1 1 200px}</style><div class="pv-root">${HTML_NAV}${HTML_GRADE}</div>`
+  },
+  {
+    label: "Destacando um card com order",
+    narr: "<strong>Docente:</strong> \"Por fim, o Card 4 recebe a classe <code>card-destaque</code> com <code>order: -1</code>. Ele está no meio do HTML, mas passa a aparecer primeiro — só a posição visual muda, o HTML continua igual.\"",
+    code: `<span class="k">.card-destaque</span> <span class="t">{</span>
+  <span class="a">order</span>: <span class="s">-1</span><span class="t">;</span> <span class="c">/* padrão de todos é 0 */</span>
+  <span class="a">border-color</span>: <span class="s">#3b82f6</span><span class="t">;</span>
+  <span class="a">border-width</span>: <span class="s">2px</span><span class="t">;</span>
+<span class="t">}</span>`,
+    preview: PV_BASE + `<style>#preview .navbar{display:flex;justify-content:space-between;align-items:center}#preview .nav-links{display:flex;gap:20px;list-style:none;margin:0;padding:0}#preview .grade-de-cards{display:flex;flex-wrap:wrap;gap:16px}#preview .card{flex:1 1 200px}#preview .card-destaque{order:-1;border-color:#3b82f6;border-width:2px}</style><div class="pv-root">${HTML_NAV}${HTML_GRADE}</div>`
+  }
+];
+
+let cur=0, typing=false, typeTimer=null;
+
+function render(){
+  const s=STEPS[cur];
+  document.getElementById('step-badge').textContent=`Etapa ${cur+1} / ${STEPS.length}`;
+  document.getElementById('step-desc').textContent=s.label;
+  document.getElementById('prog').style.width=`${Math.round(((cur+1)/STEPS.length)*100)}%`;
+  document.getElementById('btn-prev').disabled=cur===0;
+  document.getElementById('btn-next').disabled=cur===STEPS.length-1;
+  document.getElementById('narr').innerHTML=s.narr;
+  document.getElementById('preview').innerHTML=s.preview||'';
+}
+
+function showCode(s){
+  document.getElementById('code-output').innerHTML=s.code;
+}
+
+function playStep(){
+  if(typing)return;
+  typing=true;
+  const s=STEPS[cur];
+  const out=document.getElementById('code-output');
+  out.innerHTML='';
+  document.getElementById('btn-play').disabled=true;
+  document.getElementById('btn-prev').disabled=true;
+  document.getElementById('btn-next').disabled=true;
+
+  const full=s.code;
+  const stripped=full.replace(/<[^>]+>/g,'');
+  const htmlParts=[];
+  let i=0,pos=0;
+  while(i<full.length){
+    if(full[i]==='<'){
+      const end=full.indexOf('>',i);
+      if(end!==-1){htmlParts.push({type:'tag',val:full.slice(i,end+1),pos});i=end+1;continue;}
+    }
+    if(full[i]==='&'){
+      // entidade HTML (&lt; &gt; &quot; &amp; ...) digitada como um único caractere
+      const m=full.slice(i,i+10).match(/^&[a-zA-Z#0-9]+;/);
+      if(m){htmlParts.push({type:'char',val:m[0],pos,ch:'x'});pos+=m[0].length;i+=m[0].length;continue;}
+    }
+    htmlParts.push({type:'char',val:full[i],pos,ch:stripped[pos]||''});
+    pos++;i++;
+  }
+
+  let pi=0;
+  function tick(){
+    if(pi>=htmlParts.length){
+      typing=false;
+      document.getElementById('btn-play').textContent='Rever';
+      document.getElementById('btn-play').disabled=false;
+      document.getElementById('btn-next').disabled=cur===STEPS.length-1;
+      document.getElementById('btn-prev').disabled=false;
+      return;
+    }
+    const p=htmlParts[pi];
+    if(p.type==='tag'){out.innerHTML+=p.val;pi++;tick();return;}
+    out.innerHTML+=p.val;
+    pi++;
+    const delay=p.ch==='\n'?60:p.ch===' '?20:Math.random()*25+18;
+    typeTimer=setTimeout(tick,delay);
+  }
+  tick();
+}
+
+function nextStep(){
+  if(typing){clearTimeout(typeTimer);typing=false;}
+  cur=Math.min(cur+1,STEPS.length-1);
+  render();
+  showCode(STEPS[cur]);
+  document.getElementById('btn-play').textContent='Rever';
+  document.getElementById('btn-play').disabled=false;
+}
+
+function prevStep(){
+  if(typing){clearTimeout(typeTimer);typing=false;}
+  cur=Math.max(cur-1,0);
+  render();
+  showCode(STEPS[cur]);
+  document.getElementById('btn-play').textContent='Rever';
+  document.getElementById('btn-play').disabled=false;
+}
+
+render();
+document.getElementById('code-output').innerHTML='';
+document.getElementById('btn-play').textContent='Iniciar digitação';
+</script>
+
+<!-- NAV BAR -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #bfdbfe;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;z-index:9999;gap:12px">
+  <a href="a06_exposicao.html" style="display:inline-flex;align-items:center;gap:6px;background:#f8fafc;color:#64748b;font-size:12px;font-weight:600;padding:7px 15px;border-radius:8px;text-decoration:none;border:1px solid #e2e8f0;white-space:nowrap" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">&#8592; Exposição</a>
+  <div style="font-size:11px;color:#94a3b8;font-family:'Courier New',monospace;text-align:center;flex:1;line-height:1.6">Aula 06 &middot; 2 de 5 &middot; Demo ao Vivo<br><a href="https://instagram.com/karizeviecelli" target="_blank" style="color:#2563eb;text-decoration:none;font-weight:600;font-size:10px">© @karizeviecelli</a></div>
+  <a href="a06_pratica_guiada.html" style="display:inline-flex;align-items:center;gap:6px;background:#2563eb;color:#fff;font-size:12px;font-weight:600;padding:7px 15px;border-radius:8px;text-decoration:none;white-space:nowrap" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563eb'">Prática Guiada &#8594;</a>
+</div>
+</body>
+</html>

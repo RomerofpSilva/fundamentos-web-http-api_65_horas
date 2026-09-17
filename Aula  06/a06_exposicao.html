@@ -226,7 +226,25 @@ const SLIDES = [
           <div class="axis-box">3</div>
         </div>
       </div>
-      <div class="hl"><strong>Atenção:</strong> se <code>flex-direction: column</code>, os eixos INVERTEM — o principal passa a ser vertical e o cruzado horizontal.</div>`
+      <div class="compare">
+        <div class="comp-side">
+          <div class="comp-hdr" style="background:#eff6ff;color:#1d4ed8">flex-direction: row (padrão)</div>
+          <div class="comp-body" style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:8px;min-height:90px">
+            <div class="fitem" style="background:#3b82f6;color:#fff;padding:8px 12px;border-radius:6px;font-weight:600">A</div>
+            <div class="fitem" style="background:#3b82f6;color:#fff;padding:16px 12px;border-radius:6px;font-weight:600">B</div>
+            <div class="fitem" style="background:#3b82f6;color:#fff;padding:8px 12px;border-radius:6px;font-weight:600">C</div>
+          </div>
+        </div>
+        <div class="comp-side">
+          <div class="comp-hdr" style="background:#fdf4ff;color:#a21caf">flex-direction: column</div>
+          <div class="comp-body" style="display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:8px;min-height:90px">
+            <div class="fitem" style="background:#a21caf;color:#fff;padding:6px 12px;border-radius:6px;font-weight:600">A</div>
+            <div class="fitem" style="background:#a21caf;color:#fff;padding:6px 24px;border-radius:6px;font-weight:600">B</div>
+            <div class="fitem" style="background:#a21caf;color:#fff;padding:6px 12px;border-radius:6px;font-weight:600">C</div>
+          </div>
+        </div>
+      </div>
+      <div class="hl"><strong>Mesmo CSS nos dois lados</strong> (<code>justify-content: space-between; align-items: center</code>). Em <code>column</code> os eixos INVERTEM: o <code>space-between</code> passa a distribuir na vertical e o <code>align-items: center</code> passa a centralizar na horizontal.</div>`
   },
   {
     id:'justify', time:6,
@@ -326,7 +344,10 @@ const SLIDES = [
           <div class="tag-code">flex-end</div><div class="tag-name">Final da fila</div>
         </div>
       </div>
-      <div class="tag-preview" id="tag-prev">Clique em um valor acima para ver a descrição aqui.</div>`
+      <div class="flex-preview" id="flex-live" style="justify-content:flex-start;gap:0">
+        <div class="fitem">1</div><div class="fitem">2</div><div class="fitem">3</div>
+      </div>
+      <div class="tag-preview" id="tag-prev">Clique em um valor acima: a caixa de cima mostra o efeito real e a descrição aparece aqui.</div>`
   },
   {
     id:'quiz', time:3,
@@ -405,10 +426,10 @@ const SLIDES = [
         </div>
         <div class="reflect-item">
           <div class="reflect-num">4</div>
-          <div class="reflect-text"><strong>Agora é hora de construir.</strong> Vamos montar juntos, ao vivo, uma barra de navegação e uma grade de cards antes da prática individual.</div>
+          <div class="reflect-text"><strong>Agora é hora de construir.</strong> Na demo e na prática guiada: navbar + grade de cards (eixo <code>row</code>). No desafio: página "Nossa Equipe" com <code>column</code>, proporções e <code>align-self</code>.</div>
         </div>
       </div>
-      <div class="hl"><strong>Checkpoint 2 do projeto final:</strong> a atividade de hoje (navbar + grade de cards) conta como avaliação do projeto.</div>`
+      <div class="hl"><strong>Checkpoint 2 do projeto final:</strong> o desafio de hoje (página "Nossa Equipe") conta como avaliação do projeto.</div>`
   }
 ];
 
@@ -491,6 +512,8 @@ function tlClick(i) {
 function showTag(el, tag, desc) {
   document.querySelectorAll('.tag-item').forEach(t => t.classList.remove('tag-on'));
   el.classList.add('tag-on');
+  const live = document.getElementById('flex-live');
+  if (live) live.style.justifyContent = tag;
   document.getElementById('tag-prev').innerHTML =
     '<strong>justify-content: ' + tag + '</strong><br>' + desc;
 }
